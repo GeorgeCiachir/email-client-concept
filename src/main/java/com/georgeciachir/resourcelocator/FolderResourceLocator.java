@@ -1,7 +1,7 @@
 package com.georgeciachir.resourcelocator;
 
 import com.georgeciachir.exception.ResourceNotFoundException;
-import com.georgeciachir.template.TemplateType;
+import com.georgeciachir.template.HtmlTemplateType;
 
 import java.net.URL;
 import java.nio.file.Files;
@@ -12,7 +12,7 @@ public class FolderResourceLocator implements ResourceLocator {
 
     private static final String RESOURCE_NOT_FOUND_MESSAGE = "The requested resource was not found";
 
-    public String getBodyTemplate(TemplateType templateType) {
+    public String getBodyTemplate(HtmlTemplateType templateType) {
         return getFromLocation(templateType.getFileLocation());
     }
 

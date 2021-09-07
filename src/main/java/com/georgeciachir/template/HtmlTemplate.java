@@ -1,5 +1,6 @@
 package com.georgeciachir.template;
 
+import com.georgeciachir.email.creation.Draft;
 import com.georgeciachir.resourcelocator.ResourceLocator;
 
 import java.util.Objects;
@@ -17,9 +18,9 @@ public final class HtmlTemplate implements Template {
     }
 
     @Override
-    public String createContent(TemplateType type, String content, String disclaimer) {
-        String body = Objects.isNull(content) ? "" : content;
-        String template = getTemplate(type);
+    public String createContent(Draft draft, String disclaimer) {
+        String body = draft.getMessage();
+        String template = getTemplate(draft.getHtmlTemplateType());
         String templatedBody = String.format(template, body);
 
         String bodyAndDisclaimer = templatedBody;
@@ -31,7 +32,7 @@ public final class HtmlTemplate implements Template {
         return String.format(resourceLocator.getFullTemplate(), bodyAndDisclaimer);
     }
 
-    private String getTemplate(TemplateType type) {
+    private String getTemplate(HtmlTemplateType type) {
         return resourceLocator.getBodyTemplate(type);
     }
 }

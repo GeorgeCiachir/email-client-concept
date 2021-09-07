@@ -1,6 +1,8 @@
 package com.georgeciachir.template;
 
+import com.georgeciachir.email.creation.Draft;
+
 public interface Template {
 
-    String createContent(TemplateType type, String content, String disclaimer);
+    String createContent(Draft draft, String disclaimer);
 }

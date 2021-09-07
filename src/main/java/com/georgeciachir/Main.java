@@ -6,6 +6,7 @@ import com.georgeciachir.email.creation.Draft;
 import com.georgeciachir.email.creation.Email;
 import com.georgeciachir.email.service.DefaultEmailService;
 import com.georgeciachir.email.service.EmailService;
+import com.georgeciachir.template.HtmlTemplateType;
 import com.georgeciachir.template.TemplateType;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.List;
 import static com.georgeciachir.crypto.Encryption.encrypt;
 import static com.georgeciachir.crypto.EncryptionType.AES;
 import static com.georgeciachir.crypto.EncryptionType.DES;
-import static com.georgeciachir.email.creation.Draft.draftFrom;
+import static com.georgeciachir.email.creation.Draft.htmlTemplatedDraft;
 import static com.georgeciachir.email.creation.Email.emailFrom;
 
 public class Main {
@@ -28,17 +29,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Draft first = draftFrom(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, Encryption.NONE);
+        Draft first = Draft.nonTemplatedDraft(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, Encryption.NONE);
 
         Encryption encryption2 = encrypt(DES);
-        Draft second = draftFrom(TemplateType.CLASSIC, EXAMPLE_CONTENT, INTERNAL_EMAIL, RetryPolicy.RETRY, encryption2);
+        Draft second = htmlTemplatedDraft(TemplateType.HTML, HtmlTemplateType.CLASSIC, EXAMPLE_CONTENT, INTERNAL_EMAIL, RetryPolicy.RETRY, encryption2);
 
         Encryption encryption3 = encrypt(AES);
-        Draft third = draftFrom(TemplateType.NEW_MODEL, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.RETRY, encryption3);
+        Draft third = htmlTemplatedDraft(TemplateType.HTML, HtmlTemplateType.NEW_MODEL, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.RETRY, encryption3);
 
         Encryption encryption4 = encrypt(DES).thenEncrypt(AES);
-        Draft fourth = draftFrom(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, encryption4);
-
+        Draft fourth = Draft.nonTemplatedDraft(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, encryption4);
 
         DRAFTS.add(first);
         DRAFTS.add(second);

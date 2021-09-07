@@ -1,5 +1,7 @@
 package com.georgeciachir.template;
 
+import com.georgeciachir.email.creation.Draft;
+
 import java.util.Objects;
 
 public class EmptyTemplate implements Template {
@@ -12,10 +14,10 @@ public class EmptyTemplate implements Template {
     }
 
     @Override
-    public String createContent(TemplateType type, String content, String disclaimer) {
-        String body = Objects.isNull(content) ? "" : content;
+    public String createContent(Draft draft, String disclaimer) {
+        String body = draft.getMessage();
         if (Objects.isNull(disclaimer) || disclaimer.isEmpty()) {
-            return content;
+            return body;
         }
         return body.concat(" and ").concat(disclaimer);
     }

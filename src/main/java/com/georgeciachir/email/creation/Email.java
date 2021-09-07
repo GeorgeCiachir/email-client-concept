@@ -18,7 +18,7 @@ public final class Email {
         this.id = draft.getId();
         this.content = draft.getContent();
         this.retryPolicy = draft.getRetryPolicy();
-        this.encryption = draft.getEncryptionStrategy();
+        this.encryption = draft.getEncryption();
         this.emailAddress = draft.getEmailAddress();
     }
 

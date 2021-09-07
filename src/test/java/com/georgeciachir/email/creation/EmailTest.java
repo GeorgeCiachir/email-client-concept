@@ -6,7 +6,6 @@ import com.georgeciachir.crypto.encryptor.DESEncryptor;
 import com.georgeciachir.email.client.RetryPolicy;
 import com.georgeciachir.resourcelocator.FolderResourceLocator;
 import com.georgeciachir.resourcelocator.ResourceLocator;
-import com.georgeciachir.template.TemplateType;
 import com.georgeciachir.testframework.TestCase;
 
 import java.util.ArrayList;
@@ -15,9 +14,12 @@ import java.util.List;
 import static com.georgeciachir.crypto.Encryption.encrypt;
 import static com.georgeciachir.crypto.EncryptionType.AES;
 import static com.georgeciachir.crypto.EncryptionType.DES;
-import static com.georgeciachir.email.creation.Draft.draftFrom;
+import static com.georgeciachir.email.creation.Draft.htmlTemplatedDraft;
 import static com.georgeciachir.email.creation.Email.emailFrom;
 import static com.georgeciachir.template.HtmlTemplate.htmlTemplate;
+import static com.georgeciachir.template.HtmlTemplateType.CLASSIC;
+import static com.georgeciachir.template.TemplateType.HTML;
+import static com.georgeciachir.template.TemplateType.NONE;
 import static com.georgeciachir.testframework.Assert.assertEquals;
 import static com.georgeciachir.testframework.Assert.assertFalse;
 import static com.georgeciachir.testframework.Assert.assertTrue;
@@ -40,7 +42,7 @@ public class EmailTest {
     private void testEmailCreationWithoutTemplate() {
         //given
         Encryption encryption = encrypt(DES).thenEncrypt(AES);
-        Draft draft = draftFrom(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, encryption);
+        Draft draft = Draft.nonTemplatedDraft(NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, encryption);
 
         //when
         Email email = emailFrom(draft);
@@ -56,22 +58,22 @@ public class EmailTest {
     private void testEmailCreationWithClassicTemplate() {
         //given
         Encryption encryption = encrypt(DES).thenEncrypt(AES);
-        Draft draft = draftFrom(TemplateType.CLASSIC, EXAMPLE_CONTENT, INTERNAL_EMAIL, RetryPolicy.NONE, encryption);
+        Draft draft = htmlTemplatedDraft(HTML, CLASSIC, EXAMPLE_CONTENT, INTERNAL_EMAIL, RetryPolicy.NONE, encryption);
 
         //when
         Email email = emailFrom(draft);
 
         //then
-        String contentBeforeEncryption = createContentWithHTMLClassicTemplateWithoutDisclaimer();
+        String contentBeforeEncryption = createContentWithHTMLClassicTemplateWithoutDisclaimer(draft);
         String expectedAfterFirstEncryption = new DESEncryptor().apply(contentBeforeEncryption);
         String expectedAfterSecondEncryption = new AESEncryptor().apply(expectedAfterFirstEncryption);
         assertEquals(expectedAfterSecondEncryption, email.getEncryptedContent());
         assertFalse(email.isExternalEmail());
     }
 
-    private String createContentWithHTMLClassicTemplateWithoutDisclaimer() {
+    private String createContentWithHTMLClassicTemplateWithoutDisclaimer(Draft draft) {
         ResourceLocator resourceLocator = new FolderResourceLocator();
         return htmlTemplate(resourceLocator)
-                .createContent(TemplateType.CLASSIC, EXAMPLE_CONTENT, "");
+                .createContent(draft, "");
     }
 }

@@ -18,6 +18,6 @@ public class ContentAssembler {
                 : "";
 
         return templateFor(draft.getTemplateType())
-                .createContent(draft.getTemplateType(), draft.getMessage().toString(), disclaimer);
+                .createContent(draft, disclaimer);
     }
 }

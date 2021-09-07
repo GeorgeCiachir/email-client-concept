@@ -1,12 +1,12 @@
 package com.georgeciachir.resourcelocator;
 
 import com.georgeciachir.infrastructure.NotImplementedException;
-import com.georgeciachir.template.TemplateType;
+import com.georgeciachir.template.HtmlTemplateType;
 
 public class ExternalResourceLocator implements ResourceLocator {
 
     @Override
-    public String getBodyTemplate(TemplateType templateType) {
+    public String getBodyTemplate(HtmlTemplateType templateType) {
         throw new NotImplementedException("Not yet implemented");
     }
 

@@ -1,10 +1,10 @@
 package com.georgeciachir.resourcelocator;
 
-import com.georgeciachir.template.TemplateType;
+import com.georgeciachir.template.HtmlTemplateType;
 
 public interface ResourceLocator {
 
-    String getBodyTemplate(TemplateType templateType);
+    String getBodyTemplate(HtmlTemplateType templateType);
 
     String getDisclaimerTemplate();
 
