@@ -15,17 +15,17 @@ import static com.georgeciachir.crypto.EncryptionType.NO_ENCRYPTION;
 
 public class EncryptorProvider {
 
-    private static final Map<EncryptionType, Encryptor> encryptors;
+    private static final Map<EncryptionType, Encryptor> ENCRYPTORS;
 
     static {
-        encryptors = new HashMap<>();
-        encryptors.put(AES, new AESEncryptor());
-        encryptors.put(DES, new DESEncryptor());
-        encryptors.put(NO_ENCRYPTION, new NONEncryptor());
+        ENCRYPTORS = new HashMap<>();
+        ENCRYPTORS.put(AES, new AESEncryptor());
+        ENCRYPTORS.put(DES, new DESEncryptor());
+        ENCRYPTORS.put(NO_ENCRYPTION, new NONEncryptor());
     }
 
     public static Encryptor encryptorFor(EncryptionType type) {
-        Encryptor encryptor = encryptors.get(type);
+        Encryptor encryptor = ENCRYPTORS.get(type);
         if (encryptor == null) {
             throw new NotImplementedException("The EncryptorProvider must be updated for the specified type");
         }
