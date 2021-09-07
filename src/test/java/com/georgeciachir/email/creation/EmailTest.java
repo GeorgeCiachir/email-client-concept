@@ -1,12 +1,11 @@
 package com.georgeciachir.email.creation;
 
+import com.georgeciachir.crypto.Encryption;
 import com.georgeciachir.crypto.encryptor.AESEncryptor;
 import com.georgeciachir.crypto.encryptor.DESEncryptor;
-import com.georgeciachir.crypto.Encryption;
 import com.georgeciachir.email.client.RetryPolicy;
 import com.georgeciachir.resourcelocator.FolderResourceLocator;
 import com.georgeciachir.resourcelocator.ResourceLocator;
-import com.georgeciachir.template.HTMLClassicTemplate;
 import com.georgeciachir.template.TemplateType;
 import com.georgeciachir.testframework.TestCase;
 
@@ -18,6 +17,7 @@ import static com.georgeciachir.crypto.EncryptionType.AES;
 import static com.georgeciachir.crypto.EncryptionType.DES;
 import static com.georgeciachir.email.creation.Draft.draftFrom;
 import static com.georgeciachir.email.creation.Email.emailFrom;
+import static com.georgeciachir.template.HtmlTemplate.htmlTemplate;
 import static com.georgeciachir.testframework.Assert.assertEquals;
 import static com.georgeciachir.testframework.Assert.assertFalse;
 import static com.georgeciachir.testframework.Assert.assertTrue;
@@ -71,9 +71,7 @@ public class EmailTest {
 
     private String createContentWithHTMLClassicTemplateWithoutDisclaimer() {
         ResourceLocator resourceLocator = new FolderResourceLocator();
-        return HTMLClassicTemplate.builder(resourceLocator)
-                .withBody(EXAMPLE_CONTENT)
-                .build()
-                .getContent();
+        return htmlTemplate(resourceLocator)
+                .createContent(TemplateType.CLASSIC, EXAMPLE_CONTENT, "");
     }
 }

@@ -2,5 +2,5 @@ package com.georgeciachir.template;
 
 public interface Template {
 
-    String getContent();
+    String createContent(TemplateType type, String content, String disclaimer);
 }

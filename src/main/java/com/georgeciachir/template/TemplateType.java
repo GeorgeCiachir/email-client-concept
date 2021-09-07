@@ -2,8 +2,8 @@ package com.georgeciachir.template;
 
 public enum TemplateType {
 
-    CLASSIC("classicBodyTemplate.html"),
-    NEW_MODEL("newModelBodylTemplate.html"),
+    CLASSIC("classicTemplate.html"),
+    NEW_MODEL("newModelTemplate.html"),
     NONE("");
 
     private final String fileLocation;

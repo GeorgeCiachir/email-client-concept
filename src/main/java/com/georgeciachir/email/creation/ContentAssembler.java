@@ -1,12 +1,9 @@
 package com.georgeciachir.email.creation;
 
-import com.georgeciachir.resourcelocator.FolderResourceLocator;
-import com.georgeciachir.resourcelocator.ResourceLocator;
-import com.georgeciachir.template.TemplateFactory;
+import static com.georgeciachir.resourcelocator.ResourceLocatorProvider.getResourceLocator;
+import static com.georgeciachir.template.TemplateProvider.templateFor;
 
 public class ContentAssembler {
-
-    private final ResourceLocator resourceLocator = new FolderResourceLocator();
 
     private ContentAssembler() {
     }
@@ -17,13 +14,10 @@ public class ContentAssembler {
 
     public String assembleFrom(Draft draft) {
         String disclaimer = draft.isExternalEmail()
-                ? resourceLocator.getDisclaimer()
+                ? getResourceLocator().getDisclaimer()
                 : "";
 
-        return TemplateFactory.builderFor(draft.getTemplateType())
-                .withBody(draft.getMessage().toString())
-                .withDisclaimer(disclaimer)
-                .build()
-                .getContent();
+        return templateFor(draft.getTemplateType())
+                .createContent(draft.getTemplateType(), draft.getMessage().toString(), disclaimer);
     }
 }
