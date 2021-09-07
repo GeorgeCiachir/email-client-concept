@@ -1,16 +1,16 @@
-package com.georgeciachir.template;
+package com.georgeciachir.email.creation.template;
 
-import com.georgeciachir.infrastructure.NotImplementedException;
-import com.georgeciachir.resourcelocator.ResourceLocator;
-import com.georgeciachir.resourcelocator.ResourceLocatorProvider;
+import com.georgeciachir.infrastructure.exception.NotImplementedException;
+import com.georgeciachir.infrastructure.resourcelocator.ResourceLocator;
+import com.georgeciachir.infrastructure.resourcelocator.ResourceLocatorProvider;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.georgeciachir.template.EmptyTemplate.emptyTemplate;
-import static com.georgeciachir.template.HtmlTemplate.htmlTemplate;
-import static com.georgeciachir.template.TemplateType.HTML;
-import static com.georgeciachir.template.TemplateType.NONE;
+import static com.georgeciachir.email.creation.template.EmptyTemplate.emptyTemplate;
+import static com.georgeciachir.email.creation.template.HtmlTemplate.htmlTemplate;
+import static com.georgeciachir.email.creation.template.TemplateType.HTML;
+import static com.georgeciachir.email.creation.template.TemplateType.NONE;
 
 public class TemplateProvider {
 

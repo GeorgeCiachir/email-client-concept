@@ -1,6 +1,6 @@
-package com.georgeciachir.resourcelocator;
+package com.georgeciachir.infrastructure.resourcelocator;
 
-import com.georgeciachir.template.HtmlTemplateType;
+import com.georgeciachir.email.creation.template.HtmlTemplateType;
 
 public interface ResourceLocator {
 

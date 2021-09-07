@@ -1,7 +1,7 @@
-package com.georgeciachir.resourcelocator;
+package com.georgeciachir.infrastructure.resourcelocator;
 
-import com.georgeciachir.infrastructure.NotImplementedException;
-import com.georgeciachir.template.HtmlTemplateType;
+import com.georgeciachir.infrastructure.exception.NotImplementedException;
+import com.georgeciachir.email.creation.template.HtmlTemplateType;
 
 public class ExternalResourceLocator implements ResourceLocator {
 

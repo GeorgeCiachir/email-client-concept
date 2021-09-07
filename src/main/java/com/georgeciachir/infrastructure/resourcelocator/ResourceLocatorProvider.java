@@ -1,4 +1,4 @@
-package com.georgeciachir.resourcelocator;
+package com.georgeciachir.infrastructure.resourcelocator;
 
 public class ResourceLocatorProvider {
 

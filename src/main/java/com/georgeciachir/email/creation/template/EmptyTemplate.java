@@ -1,4 +1,4 @@
-package com.georgeciachir.template;
+package com.georgeciachir.email.creation.template;
 
 import com.georgeciachir.email.creation.Draft;
 

@@ -1,14 +1,16 @@
 package com.georgeciachir.crypto;
 
-import com.georgeciachir.crypto.encryptor.AESEncryptor;
-import com.georgeciachir.crypto.encryptor.DESEncryptor;
-import com.georgeciachir.testframework.TestCase;
+import com.georgeciachir.infrastructure.crypto.encryptor.AESEncryptor;
+import com.georgeciachir.infrastructure.crypto.encryptor.DESEncryptor;
+import com.georgeciachir.infrastructure.crypto.Encryption;
+import com.georgeciachir.infrastructure.crypto.EncryptionType;
+import com.georgeciachir.infrastructure.TestCase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.georgeciachir.crypto.Encryption.encrypt;
-import static com.georgeciachir.testframework.Assert.assertEquals;
+import static com.georgeciachir.infrastructure.crypto.Encryption.encrypt;
+import static com.georgeciachir.infrastructure.Assert.assertEquals;
 
 
 public class EncryptionStrategyTest {

@@ -1,11 +1,11 @@
-package com.georgeciachir.crypto;
+package com.georgeciachir.infrastructure.crypto;
 
-import com.georgeciachir.crypto.encryptor.Encryptor;
+import com.georgeciachir.infrastructure.crypto.encryptor.Encryptor;
 
 import java.util.function.Function;
 
-import static com.georgeciachir.crypto.EncryptionType.NO_ENCRYPTION;
-import static com.georgeciachir.crypto.EncryptorProvider.encryptorFor;
+import static com.georgeciachir.infrastructure.crypto.EncryptionType.NO_ENCRYPTION;
+import static com.georgeciachir.infrastructure.crypto.EncryptorProvider.encryptorFor;
 
 public class Encryption {
 

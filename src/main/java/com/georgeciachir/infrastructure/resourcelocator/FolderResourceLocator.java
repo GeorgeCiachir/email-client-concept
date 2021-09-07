@@ -1,7 +1,7 @@
-package com.georgeciachir.resourcelocator;
+package com.georgeciachir.infrastructure.resourcelocator;
 
-import com.georgeciachir.exception.ResourceNotFoundException;
-import com.georgeciachir.template.HtmlTemplateType;
+import com.georgeciachir.infrastructure.exception.ResourceNotFoundException;
+import com.georgeciachir.email.creation.template.HtmlTemplateType;
 
 import java.net.URL;
 import java.nio.file.Files;

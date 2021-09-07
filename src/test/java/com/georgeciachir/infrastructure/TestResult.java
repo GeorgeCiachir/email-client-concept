@@ -1,4 +1,4 @@
-package com.georgeciachir.testframework;
+package com.georgeciachir.infrastructure;
 
 public class TestResult {
 

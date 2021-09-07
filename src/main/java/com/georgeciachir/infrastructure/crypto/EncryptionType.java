@@ -1,4 +1,4 @@
-package com.georgeciachir.crypto;
+package com.georgeciachir.infrastructure.crypto;
 
 public enum EncryptionType {
 

@@ -1,7 +1,7 @@
-package com.georgeciachir.template;
+package com.georgeciachir.email.creation.template;
 
 import com.georgeciachir.email.creation.Draft;
-import com.georgeciachir.resourcelocator.ResourceLocator;
+import com.georgeciachir.infrastructure.resourcelocator.ResourceLocator;
 
 import java.util.Objects;
 

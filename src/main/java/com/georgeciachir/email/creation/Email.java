@@ -1,6 +1,6 @@
 package com.georgeciachir.email.creation;
 
-import com.georgeciachir.crypto.Encryption;
+import com.georgeciachir.infrastructure.crypto.Encryption;
 import com.georgeciachir.email.client.RetryPolicy;
 
 import java.util.UUID;

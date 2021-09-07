@@ -1,4 +1,4 @@
-package com.georgeciachir.exception;
+package com.georgeciachir.infrastructure.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 

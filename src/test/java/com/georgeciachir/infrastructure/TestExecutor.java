@@ -1,4 +1,4 @@
-package com.georgeciachir.testframework;
+package com.georgeciachir.infrastructure;
 
 import com.georgeciachir.crypto.EncryptionStrategyTest;
 import com.georgeciachir.email.client.RetryEmailClientTest;
@@ -7,8 +7,8 @@ import com.georgeciachir.email.creation.EmailTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.georgeciachir.testframework.TestResult.failed;
-import static com.georgeciachir.testframework.TestResult.passed;
+import static com.georgeciachir.infrastructure.TestResult.failed;
+import static com.georgeciachir.infrastructure.TestResult.passed;
 
 public class TestExecutor {
 

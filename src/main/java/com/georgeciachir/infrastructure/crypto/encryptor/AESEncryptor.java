@@ -1,4 +1,4 @@
-package com.georgeciachir.crypto.encryptor;
+package com.georgeciachir.infrastructure.crypto.encryptor;
 
 public class AESEncryptor implements Encryptor {
 

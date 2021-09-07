@@ -1,7 +1,7 @@
 package com.georgeciachir.email.creation;
 
-import static com.georgeciachir.resourcelocator.ResourceLocatorProvider.getResourceLocator;
-import static com.georgeciachir.template.TemplateProvider.templateFor;
+import static com.georgeciachir.infrastructure.resourcelocator.ResourceLocatorProvider.getResourceLocator;
+import static com.georgeciachir.email.creation.template.TemplateProvider.templateFor;
 
 public class ContentAssembler {
 

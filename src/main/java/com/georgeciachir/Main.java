@@ -1,20 +1,20 @@
 package com.georgeciachir;
 
-import com.georgeciachir.crypto.Encryption;
+import com.georgeciachir.infrastructure.crypto.Encryption;
 import com.georgeciachir.email.client.RetryPolicy;
 import com.georgeciachir.email.creation.Draft;
 import com.georgeciachir.email.creation.Email;
 import com.georgeciachir.email.service.DefaultEmailService;
 import com.georgeciachir.email.service.EmailService;
-import com.georgeciachir.template.HtmlTemplateType;
-import com.georgeciachir.template.TemplateType;
+import com.georgeciachir.email.creation.template.HtmlTemplateType;
+import com.georgeciachir.email.creation.template.TemplateType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.georgeciachir.crypto.Encryption.encrypt;
-import static com.georgeciachir.crypto.EncryptionType.AES;
-import static com.georgeciachir.crypto.EncryptionType.DES;
+import static com.georgeciachir.infrastructure.crypto.Encryption.encrypt;
+import static com.georgeciachir.infrastructure.crypto.EncryptionType.AES;
+import static com.georgeciachir.infrastructure.crypto.EncryptionType.DES;
 import static com.georgeciachir.email.creation.Draft.htmlTemplatedDraft;
 import static com.georgeciachir.email.creation.Email.emailFrom;
 

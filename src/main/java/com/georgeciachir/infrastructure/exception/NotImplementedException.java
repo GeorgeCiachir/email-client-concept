@@ -1,4 +1,4 @@
-package com.georgeciachir.infrastructure;
+package com.georgeciachir.infrastructure.exception;
 
 public class NotImplementedException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package com.georgeciachir.testframework;
+package com.georgeciachir.infrastructure;
 
 import java.util.ArrayList;
 import java.util.HashMap;

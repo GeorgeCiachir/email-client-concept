@@ -1,15 +1,15 @@
 package com.georgeciachir.email.creation;
 
-import com.georgeciachir.crypto.Encryption;
+import com.georgeciachir.infrastructure.crypto.Encryption;
 import com.georgeciachir.email.client.RetryPolicy;
-import com.georgeciachir.template.HtmlTemplateType;
-import com.georgeciachir.template.TemplateType;
+import com.georgeciachir.email.creation.template.HtmlTemplateType;
+import com.georgeciachir.email.creation.template.TemplateType;
 
 import java.util.Objects;
 import java.util.UUID;
 
 import static com.georgeciachir.email.creation.ContentAssembler.contentAssembler;
-import static com.georgeciachir.template.TemplateType.HTML;
+import static com.georgeciachir.email.creation.template.TemplateType.HTML;
 
 public final class Draft {
 

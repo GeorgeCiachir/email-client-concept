@@ -1,12 +1,12 @@
 package com.georgeciachir.email.client;
 
-import com.georgeciachir.testframework.TestCase;
+import com.georgeciachir.infrastructure.TestCase;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.georgeciachir.testframework.Assert.assertEquals;
+import static com.georgeciachir.infrastructure.Assert.assertEquals;
 
 
 public class RetryEmailClientTest {
