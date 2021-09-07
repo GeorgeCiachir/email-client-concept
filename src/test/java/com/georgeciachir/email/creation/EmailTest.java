@@ -1,8 +1,8 @@
 package com.georgeciachir.email.creation;
 
-import com.georgeciachir.crypto.AESEncryptor;
-import com.georgeciachir.crypto.DESEncryptor;
-import com.georgeciachir.crypto.EncryptionStrategy;
+import com.georgeciachir.crypto.encryptor.AESEncryptor;
+import com.georgeciachir.crypto.encryptor.DESEncryptor;
+import com.georgeciachir.crypto.Encryption;
 import com.georgeciachir.email.client.RetryPolicy;
 import com.georgeciachir.resourcelocator.FolderResourceLocator;
 import com.georgeciachir.resourcelocator.ResourceLocator;
@@ -13,7 +13,7 @@ import com.georgeciachir.testframework.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.georgeciachir.crypto.EncryptionStrategy.encryptionFor;
+import static com.georgeciachir.crypto.Encryption.encrypt;
 import static com.georgeciachir.crypto.EncryptionType.AES;
 import static com.georgeciachir.crypto.EncryptionType.DES;
 import static com.georgeciachir.email.creation.Draft.draftFrom;
@@ -39,32 +39,32 @@ public class EmailTest {
 
     private void testEmailCreationWithoutTemplate() {
         //given
-        EncryptionStrategy encryptionStrategy = encryptionFor(DES).thenApply(AES);
-        Draft draft = draftFrom(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, encryptionStrategy);
+        Encryption encryption = encrypt(DES).thenEncrypt(AES);
+        Draft draft = draftFrom(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, encryption);
 
         //when
         Email email = emailFrom(draft);
 
         //then
         String expectedContent = EXAMPLE_CONTENT.concat(" and ").concat(DISCLAIMER);
-        String expectedAfterFirstEncryption = new DESEncryptor().encrypt(expectedContent);
-        String expectedAfterSecondEncryption = new AESEncryptor().encrypt(expectedAfterFirstEncryption);
+        String expectedAfterFirstEncryption = new DESEncryptor().apply(expectedContent);
+        String expectedAfterSecondEncryption = new AESEncryptor().apply(expectedAfterFirstEncryption);
         assertEquals(expectedAfterSecondEncryption, email.getEncryptedContent());
         assertTrue(email.isExternalEmail());
     }
 
     private void testEmailCreationWithClassicTemplate() {
         //given
-        EncryptionStrategy encryptionStrategy = encryptionFor(DES).thenApply(AES);
-        Draft draft = draftFrom(TemplateType.CLASSIC, EXAMPLE_CONTENT, INTERNAL_EMAIL, RetryPolicy.NONE, encryptionStrategy);
+        Encryption encryption = encrypt(DES).thenEncrypt(AES);
+        Draft draft = draftFrom(TemplateType.CLASSIC, EXAMPLE_CONTENT, INTERNAL_EMAIL, RetryPolicy.NONE, encryption);
 
         //when
         Email email = emailFrom(draft);
 
         //then
         String contentBeforeEncryption = createContentWithHTMLClassicTemplateWithoutDisclaimer();
-        String expectedAfterFirstEncryption = new DESEncryptor().encrypt(contentBeforeEncryption);
-        String expectedAfterSecondEncryption = new AESEncryptor().encrypt(expectedAfterFirstEncryption);
+        String expectedAfterFirstEncryption = new DESEncryptor().apply(contentBeforeEncryption);
+        String expectedAfterSecondEncryption = new AESEncryptor().apply(expectedAfterFirstEncryption);
         assertEquals(expectedAfterSecondEncryption, email.getEncryptedContent());
         assertFalse(email.isExternalEmail());
     }

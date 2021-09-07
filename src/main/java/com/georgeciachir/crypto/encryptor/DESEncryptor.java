@@ -1,9 +1,9 @@
-package com.georgeciachir.crypto;
+package com.georgeciachir.crypto.encryptor;
 
 public class DESEncryptor implements Encryptor {
 
     @Override
-    public String encrypt(String content) {
+    public String apply(String content) {
         return "DES encryption applied over -> " + content;
     }
 }

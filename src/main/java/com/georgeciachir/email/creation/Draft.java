@@ -1,6 +1,6 @@
 package com.georgeciachir.email.creation;
 
-import com.georgeciachir.crypto.EncryptionStrategy;
+import com.georgeciachir.crypto.Encryption;
 import com.georgeciachir.email.client.RetryPolicy;
 import com.georgeciachir.template.TemplateType;
 
@@ -16,7 +16,7 @@ public final class Draft {
     private final TemplateType templateType;
     private final String emailAddress;
     private final RetryPolicy retryPolicy;
-    private final EncryptionStrategy encryptionStrategy;
+    private final Encryption encryption;
 
     private Draft(DraftBuilder draftBuilder) {
         this.id = UUID.randomUUID();
@@ -24,7 +24,7 @@ public final class Draft {
         this.templateType = draftBuilder.getTemplateType();
         this.emailAddress = draftBuilder.getEmailAddress();
         this.retryPolicy = draftBuilder.getRetryPolicy();
-        this.encryptionStrategy = draftBuilder.getEncryptionStrategy();
+        this.encryption = draftBuilder.getEncryptionStrategy();
     }
 
     public UUID getId() {
@@ -51,8 +51,8 @@ public final class Draft {
         return retryPolicy;
     }
 
-    public EncryptionStrategy getEncryptionStrategy() {
-        return encryptionStrategy;
+    public Encryption getEncryptionStrategy() {
+        return encryption;
     }
 
     public TemplateType getTemplateType() {
@@ -63,13 +63,13 @@ public final class Draft {
                                   String content,
                                   String to,
                                   RetryPolicy retryPolicy,
-                                  EncryptionStrategy encryptionStrategy) {
+                                  Encryption encryption) {
         return Draft.builder()
                 .withTemplate(templateType)
                 .withMessage(content)
                 .withEmailAddress(to)
                 .withRetryPolicy(retryPolicy)
-                .withEncryptionStrategy(encryptionStrategy)
+                .withEncryptionStrategy(encryption)
                 .build();
     }
 
@@ -83,7 +83,7 @@ public final class Draft {
         private String emailAddress;
         private TemplateType templateType;
         private RetryPolicy retryPolicy;
-        private EncryptionStrategy encryptionStrategy;
+        private Encryption encryption;
 
         public DraftBuilder withMessage(String message) {
             this.message = new StringBuilder(message);
@@ -105,8 +105,8 @@ public final class Draft {
             return this;
         }
 
-        public DraftBuilder withEncryptionStrategy(EncryptionStrategy encryptionStrategy) {
-            this.encryptionStrategy = encryptionStrategy;
+        public DraftBuilder withEncryptionStrategy(Encryption encryption) {
+            this.encryption = encryption;
             return this;
         }
 
@@ -117,8 +117,8 @@ public final class Draft {
             if (Objects.isNull(retryPolicy)) {
                 retryPolicy = RetryPolicy.NONE;
             }
-            if (Objects.isNull(encryptionStrategy)) {
-                encryptionStrategy = EncryptionStrategy.NONE;
+            if (Objects.isNull(encryption)) {
+                encryption = Encryption.NONE;
             }
             return new Draft(this);
         }
@@ -139,8 +139,8 @@ public final class Draft {
             return retryPolicy;
         }
 
-        public EncryptionStrategy getEncryptionStrategy() {
-            return encryptionStrategy;
+        public Encryption getEncryptionStrategy() {
+            return encryption;
         }
     }
 

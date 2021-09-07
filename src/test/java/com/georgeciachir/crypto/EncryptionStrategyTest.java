@@ -1,11 +1,13 @@
 package com.georgeciachir.crypto;
 
+import com.georgeciachir.crypto.encryptor.AESEncryptor;
+import com.georgeciachir.crypto.encryptor.DESEncryptor;
 import com.georgeciachir.testframework.TestCase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.georgeciachir.crypto.EncryptionStrategy.encryptionFor;
+import static com.georgeciachir.crypto.Encryption.encrypt;
 import static com.georgeciachir.testframework.Assert.assertEquals;
 
 
@@ -21,11 +23,11 @@ public class EncryptionStrategyTest {
 
     private void testNoEncryption() {
         //given
-        EncryptionStrategy encryptionStrategy = EncryptionStrategy.NONE;
+        Encryption encryption = Encryption.NONE;
         String expected = "expected";
 
         //when
-        String actual = encryptionStrategy.encrypt(expected);
+        String actual = encryption.apply(expected);
 
         //then
         assertEquals(actual, expected);
@@ -33,13 +35,13 @@ public class EncryptionStrategyTest {
 
     private void testMultipleEncryption() {
         //given
-        EncryptionStrategy encryptionStrategy = encryptionFor(EncryptionType.AES).thenApply(EncryptionType.DES);
+        Encryption encryption = encrypt(EncryptionType.AES).thenEncrypt(EncryptionType.DES);
         String content = "content";
-        String firstEncryption = new AESEncryptor().encrypt(content);
-        String secondEncryption = new DESEncryptor().encrypt(firstEncryption);
+        String firstEncryption = new AESEncryptor().apply(content);
+        String secondEncryption = new DESEncryptor().apply(firstEncryption);
 
         //when
-        String actual = encryptionStrategy.encrypt(content);
+        String actual = encryption.apply(content);
 
         //then
         assertEquals(actual, secondEncryption);

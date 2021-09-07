@@ -1,6 +1,6 @@
 package com.georgeciachir.email.creation;
 
-import com.georgeciachir.crypto.EncryptionStrategy;
+import com.georgeciachir.crypto.Encryption;
 import com.georgeciachir.email.client.RetryPolicy;
 
 import java.util.UUID;
@@ -10,7 +10,7 @@ public final class Email {
     private final UUID id;
     private final String content;
     private final RetryPolicy retryPolicy;
-    private final EncryptionStrategy encryptionStrategy;
+    private final Encryption encryption;
     private final String emailAddress;
     private boolean successfullySent;
 
@@ -18,7 +18,7 @@ public final class Email {
         this.id = draft.getId();
         this.content = draft.getContent();
         this.retryPolicy = draft.getRetryPolicy();
-        this.encryptionStrategy = draft.getEncryptionStrategy();
+        this.encryption = draft.getEncryptionStrategy();
         this.emailAddress = draft.getEmailAddress();
     }
 
@@ -39,7 +39,7 @@ public final class Email {
     }
 
     public String getEncryptedContent() {
-        return encryptionStrategy.encrypt(content);
+        return encryption.apply(content);
     }
 
     public boolean isExternalEmail() {

@@ -1,6 +1,6 @@
 package com.georgeciachir;
 
-import com.georgeciachir.crypto.EncryptionStrategy;
+import com.georgeciachir.crypto.Encryption;
 import com.georgeciachir.email.client.RetryPolicy;
 import com.georgeciachir.email.creation.Draft;
 import com.georgeciachir.email.creation.Email;
@@ -11,7 +11,7 @@ import com.georgeciachir.template.TemplateType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.georgeciachir.crypto.EncryptionStrategy.encryptionFor;
+import static com.georgeciachir.crypto.Encryption.encrypt;
 import static com.georgeciachir.crypto.EncryptionType.AES;
 import static com.georgeciachir.crypto.EncryptionType.DES;
 import static com.georgeciachir.email.creation.Draft.draftFrom;
@@ -28,15 +28,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Draft first = draftFrom(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, EncryptionStrategy.NONE);
+        Draft first = draftFrom(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, Encryption.NONE);
 
-        EncryptionStrategy encryption2 = encryptionFor(DES);
+        Encryption encryption2 = encrypt(DES);
         Draft second = draftFrom(TemplateType.CLASSIC, EXAMPLE_CONTENT, INTERNAL_EMAIL, RetryPolicy.RETRY, encryption2);
 
-        EncryptionStrategy encryption3 = encryptionFor(AES);
+        Encryption encryption3 = encrypt(AES);
         Draft third = draftFrom(TemplateType.NEW_MODEL, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.RETRY, encryption3);
 
-        EncryptionStrategy encryption4 = encryptionFor(DES).thenApply(AES);
+        Encryption encryption4 = encrypt(DES).thenEncrypt(AES);
         Draft fourth = draftFrom(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, encryption4);
 
 

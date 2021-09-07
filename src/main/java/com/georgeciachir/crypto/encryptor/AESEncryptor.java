@@ -1,9 +1,9 @@
-package com.georgeciachir.crypto;
+package com.georgeciachir.crypto.encryptor;
 
 public class AESEncryptor implements Encryptor {
 
     @Override
-    public String encrypt(String content) {
+    public String apply(String content) {
         return "AES encryption applied over -> " + content;
     }
 }

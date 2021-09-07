@@ -1,8 +1,8 @@
 package com.georgeciachir.template;
 
+import com.georgeciachir.infrastructure.NotImplementedException;
 import com.georgeciachir.resourcelocator.FolderResourceLocator;
 import com.georgeciachir.resourcelocator.ResourceLocator;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class TemplateFactory {
 
@@ -17,7 +17,7 @@ public class TemplateFactory {
             case NONE:
                 return EmptyTemplate.builder();
             default:
-                throw new NotImplementedException();
+                throw new NotImplementedException("");
         }
     }
 }
