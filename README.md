@@ -1,3 +1,9 @@
+### Infrastructure requirements
+- Maven project that builds the project and run the unit tests to prove the code is correct.
+- Do not use third-party libraries, just the libraries available in the standard JDK 8.
+
+
+### Implementation requirements
 Write an email client for sending emails with different characteristics, with a basic public contract like the one below:
 
 ```
