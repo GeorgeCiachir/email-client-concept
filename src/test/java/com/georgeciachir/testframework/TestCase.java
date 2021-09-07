@@ -1,10 +1,9 @@
-package com.georgeciachir;
+package com.georgeciachir.testframework;
 
 public class TestCase {
 
     private final String testName;
     private final Runnable runnable;
-
 
     public TestCase(String testName, Runnable runnable) {
         this.testName = testName;

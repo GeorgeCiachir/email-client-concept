@@ -1,4 +1,4 @@
-package com.georgeciachir;
+package com.georgeciachir.testframework;
 
 import com.georgeciachir.crypto.EncryptionStrategyTest;
 import com.georgeciachir.email.client.RetryEmailClientTest;
@@ -7,12 +7,13 @@ import com.georgeciachir.email.creation.EmailTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.georgeciachir.TestResult.failed;
-import static com.georgeciachir.TestResult.passed;
+import static com.georgeciachir.testframework.TestResult.failed;
+import static com.georgeciachir.testframework.TestResult.passed;
 
 public class TestExecutor {
 
     public static void main(String[] args) {
+        //TODO: this should be provided by an annotation processor that reads a @Test annotation from each test method
         List<TestCase> testCases = new ArrayList<>();
         testCases.addAll(new EncryptionStrategyTest().getTests());
         testCases.addAll(new RetryEmailClientTest().getTests());
@@ -28,7 +29,6 @@ public class TestExecutor {
     private static TestResult runTest(TestCase testCase) {
         String testName = testCase.getTestName();
 
-        testCase.getRunnableMethod().run();
         try {
             testCase.getRunnableMethod().run();
             return passed(testName);

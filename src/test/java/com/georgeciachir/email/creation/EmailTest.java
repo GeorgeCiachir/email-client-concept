@@ -1,6 +1,6 @@
 package com.georgeciachir.email.creation;
 
-import com.georgeciachir.TestCase;
+import com.georgeciachir.testframework.TestCase;
 import com.georgeciachir.crypto.AESEncryptor;
 import com.georgeciachir.crypto.DESEncryptor;
 import com.georgeciachir.crypto.EncryptionStrategy;
@@ -13,9 +13,9 @@ import com.georgeciachir.template.TemplateType;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.georgeciachir.Assert.assertEquals;
-import static com.georgeciachir.Assert.assertFalse;
-import static com.georgeciachir.Assert.assertTrue;
+import static com.georgeciachir.testframework.Assert.assertEquals;
+import static com.georgeciachir.testframework.Assert.assertFalse;
+import static com.georgeciachir.testframework.Assert.assertTrue;
 import static com.georgeciachir.crypto.EncryptionType.AES;
 import static com.georgeciachir.crypto.EncryptionType.DES;
 import static com.georgeciachir.email.creation.Draft.draftFrom;
@@ -28,6 +28,7 @@ public class EmailTest {
     private static final String INTERNAL_EMAIL = "john.doe@company.com";
     private static final String DISCLAIMER = "This is the disclaimer";
 
+    //TODO: create an annotation processor to read a @Test annotation from each method
     public List<TestCase> getTests() {
         List<TestCase> testCases = new ArrayList<>();
         testCases.add(new TestCase("testEmailCreationWithoutTemplate", this::testEmailCreationWithoutTemplate));

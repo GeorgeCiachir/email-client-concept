@@ -1,4 +1,4 @@
-package com.georgeciachir;
+package com.georgeciachir.testframework;
 
 import java.util.Objects;
 
@@ -12,14 +12,13 @@ public class Assert {
         }
     }
 
-    public static void assertTrue(Boolean actual) {
-        Objects.requireNonNull(actual);
+    public static void assertTrue(boolean actual) {
         if (!actual) {
             throw new AssertionError("The objects are not equal");
         }
     }
 
-    public static void assertFalse(Boolean actual) {
+    public static void assertFalse(boolean actual) {
         assertTrue(!actual);
     }
 }

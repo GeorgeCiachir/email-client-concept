@@ -1,16 +1,17 @@
 package com.georgeciachir.email.client;
 
-import com.georgeciachir.TestCase;
+import com.georgeciachir.testframework.TestCase;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.georgeciachir.Assert.assertEquals;
+import static com.georgeciachir.testframework.Assert.assertEquals;
 
 
 public class RetryEmailClientTest {
 
+    //TODO: create an annotation processor to read a @Test annotation from each method
     public List<TestCase> getTests() {
         List<TestCase> testCases = new ArrayList<>();
         testCases.add(new TestCase("testEmailSendingRetried", this::testEmailSendingRetried));
