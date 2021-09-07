@@ -19,7 +19,7 @@ public class DefaultEmailService implements EmailService {
 
     private void logExternalEmail(Email email) {
         if (email.isExternalEmail()) {
-            System.out.println("Sending email with id: " + email.getId() + " to external email address: " + email.getEmailAddress());
+            System.out.println("Sending external email with id: " + email.getId() + " to email address: " + email.getEmailAddress());
             System.out.println("The content of the email is: " + email.getEncryptedContent());
             System.out.println("**************************");
             System.out.println();
