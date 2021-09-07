@@ -5,6 +5,7 @@ import com.georgeciachir.testframework.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.georgeciachir.crypto.EncryptionStrategy.encryptionFor;
 import static com.georgeciachir.testframework.Assert.assertEquals;
 
 
@@ -20,11 +21,11 @@ public class EncryptionStrategyTest {
 
     private void testNoEncryption() {
         //given
-        EncryptionStrategy encryptionStrategy = new EncryptionStrategy();
+        EncryptionStrategy encryptionStrategy = EncryptionStrategy.NONE;
         String expected = "expected";
 
         //when
-        String actual = encryptionStrategy.apply(expected);
+        String actual = encryptionStrategy.encrypt(expected);
 
         //then
         assertEquals(actual, expected);
@@ -32,13 +33,13 @@ public class EncryptionStrategyTest {
 
     private void testMultipleEncryption() {
         //given
-        EncryptionStrategy encryptionStrategy = new EncryptionStrategy().with(EncryptionType.AES).with(EncryptionType.DES);
+        EncryptionStrategy encryptionStrategy = encryptionFor(EncryptionType.AES).thenApply(EncryptionType.DES);
         String content = "content";
         String firstEncryption = new AESEncryptor().encrypt(content);
         String secondEncryption = new DESEncryptor().encrypt(firstEncryption);
 
         //when
-        String actual = encryptionStrategy.apply(content);
+        String actual = encryptionStrategy.encrypt(content);
 
         //then
         assertEquals(actual, secondEncryption);

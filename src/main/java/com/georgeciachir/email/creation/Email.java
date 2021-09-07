@@ -39,7 +39,7 @@ public final class Email {
     }
 
     public String getEncryptedContent() {
-        return encryptionStrategy.apply(content);
+        return encryptionStrategy.encrypt(content);
     }
 
     public boolean isExternalEmail() {

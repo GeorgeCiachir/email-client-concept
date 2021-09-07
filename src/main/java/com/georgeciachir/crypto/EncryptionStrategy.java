@@ -11,7 +11,20 @@ public class EncryptionStrategy {
     public static final EncryptionStrategy NONE = new EncryptionStrategy();
     private final List<Encryptor> encryptors = new ArrayList<>();
 
-    public EncryptionStrategy with(EncryptionType type) {
+    private EncryptionStrategy() {
+    }
+
+    public static EncryptionStrategy encryptionFor(EncryptionType type) {
+        EncryptionStrategy encryptionStrategy = new EncryptionStrategy();
+        if (AES.equals(type)) {
+            encryptionStrategy.encryptors.add(new AESEncryptor());
+        } else if (DES.equals(type)) {
+            encryptionStrategy.encryptors.add(new DESEncryptor());
+        }
+        return encryptionStrategy;
+    }
+
+    public EncryptionStrategy thenApply(EncryptionType type) {
         if (AES.equals(type)) {
             encryptors.add(new AESEncryptor());
         } else if (DES.equals(type)) {
@@ -20,7 +33,7 @@ public class EncryptionStrategy {
         return this;
     }
 
-    public String apply(String content) {
+    public String encrypt(String content) {
         return encryptors.stream()
                 .reduce(content,
                         (oldValue, encryptor) -> encryptor.encrypt(oldValue),

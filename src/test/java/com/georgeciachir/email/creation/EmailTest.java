@@ -1,6 +1,5 @@
 package com.georgeciachir.email.creation;
 
-import com.georgeciachir.testframework.TestCase;
 import com.georgeciachir.crypto.AESEncryptor;
 import com.georgeciachir.crypto.DESEncryptor;
 import com.georgeciachir.crypto.EncryptionStrategy;
@@ -9,17 +8,19 @@ import com.georgeciachir.resourcelocator.FolderResourceLocator;
 import com.georgeciachir.resourcelocator.ResourceLocator;
 import com.georgeciachir.template.HTMLClassicTemplate;
 import com.georgeciachir.template.TemplateType;
+import com.georgeciachir.testframework.TestCase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.georgeciachir.testframework.Assert.assertEquals;
-import static com.georgeciachir.testframework.Assert.assertFalse;
-import static com.georgeciachir.testframework.Assert.assertTrue;
+import static com.georgeciachir.crypto.EncryptionStrategy.encryptionFor;
 import static com.georgeciachir.crypto.EncryptionType.AES;
 import static com.georgeciachir.crypto.EncryptionType.DES;
 import static com.georgeciachir.email.creation.Draft.draftFrom;
 import static com.georgeciachir.email.creation.Email.emailFrom;
+import static com.georgeciachir.testframework.Assert.assertEquals;
+import static com.georgeciachir.testframework.Assert.assertFalse;
+import static com.georgeciachir.testframework.Assert.assertTrue;
 
 public class EmailTest {
 
@@ -38,7 +39,7 @@ public class EmailTest {
 
     private void testEmailCreationWithoutTemplate() {
         //given
-        EncryptionStrategy encryptionStrategy = new EncryptionStrategy().with(DES).with(AES);
+        EncryptionStrategy encryptionStrategy = encryptionFor(DES).thenApply(AES);
         Draft draft = draftFrom(TemplateType.NONE, EXAMPLE_CONTENT, EXTERNAL_EMAIL, RetryPolicy.NONE, encryptionStrategy);
 
         //when
@@ -54,7 +55,7 @@ public class EmailTest {
 
     private void testEmailCreationWithClassicTemplate() {
         //given
-        EncryptionStrategy encryptionStrategy = new EncryptionStrategy().with(DES).with(AES);
+        EncryptionStrategy encryptionStrategy = encryptionFor(DES).thenApply(AES);
         Draft draft = draftFrom(TemplateType.CLASSIC, EXAMPLE_CONTENT, INTERNAL_EMAIL, RetryPolicy.NONE, encryptionStrategy);
 
         //when
