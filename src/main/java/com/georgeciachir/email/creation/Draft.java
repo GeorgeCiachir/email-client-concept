@@ -1,14 +1,15 @@
 package com.georgeciachir.email.creation;
 
-import com.georgeciachir.infrastructure.crypto.Encryption;
 import com.georgeciachir.email.client.RetryPolicy;
 import com.georgeciachir.email.creation.template.HtmlTemplateType;
 import com.georgeciachir.email.creation.template.TemplateType;
+import com.georgeciachir.infrastructure.crypto.Encryption;
 
 import java.util.Objects;
 import java.util.UUID;
 
 import static com.georgeciachir.email.creation.ContentAssembler.contentAssembler;
+import static com.georgeciachir.email.creation.DraftContent.draftContent;
 import static com.georgeciachir.email.creation.template.TemplateType.HTML;
 
 public final class Draft {
@@ -36,7 +37,8 @@ public final class Draft {
     }
 
     public String getContent() {
-        return contentAssembler().assembleFrom(this);
+        DraftContent draftContent = draftContent(this.getMessage(), this.getTemplateType(), this.getHtmlTemplateType());
+        return contentAssembler().assembleFrom(draftContent, isExternalEmail());
     }
 
     public boolean isExternalEmail() {

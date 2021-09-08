@@ -1,6 +1,6 @@
 package com.georgeciachir.email.creation.template;
 
-import com.georgeciachir.email.creation.Draft;
+import com.georgeciachir.email.creation.DraftContent;
 
 import java.util.Objects;
 
@@ -14,8 +14,8 @@ public class EmptyTemplate implements Template {
     }
 
     @Override
-    public String createContent(Draft draft, String disclaimer) {
-        String body = draft.getMessage();
+    public String createContent(DraftContent draftContent, String disclaimer) {
+        String body = draftContent.getMessage();
         if (Objects.isNull(disclaimer) || disclaimer.isEmpty()) {
             return body;
         }

@@ -1,20 +1,18 @@
 package com.georgeciachir.email.creation;
 
+import com.georgeciachir.email.client.RetryPolicy;
+import com.georgeciachir.infrastructure.TestCase;
 import com.georgeciachir.infrastructure.crypto.Encryption;
 import com.georgeciachir.infrastructure.crypto.encryptor.AESEncryptor;
 import com.georgeciachir.infrastructure.crypto.encryptor.DESEncryptor;
-import com.georgeciachir.email.client.RetryPolicy;
 import com.georgeciachir.infrastructure.resourcelocator.FolderResourceLocator;
 import com.georgeciachir.infrastructure.resourcelocator.ResourceLocator;
-import com.georgeciachir.infrastructure.TestCase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.georgeciachir.infrastructure.crypto.Encryption.encrypt;
-import static com.georgeciachir.infrastructure.crypto.EncryptionType.AES;
-import static com.georgeciachir.infrastructure.crypto.EncryptionType.DES;
 import static com.georgeciachir.email.creation.Draft.htmlTemplatedDraft;
+import static com.georgeciachir.email.creation.DraftContent.draftContent;
 import static com.georgeciachir.email.creation.Email.emailFrom;
 import static com.georgeciachir.email.creation.template.HtmlTemplate.htmlTemplate;
 import static com.georgeciachir.email.creation.template.HtmlTemplateType.CLASSIC;
@@ -23,6 +21,9 @@ import static com.georgeciachir.email.creation.template.TemplateType.NONE;
 import static com.georgeciachir.infrastructure.Assert.assertEquals;
 import static com.georgeciachir.infrastructure.Assert.assertFalse;
 import static com.georgeciachir.infrastructure.Assert.assertTrue;
+import static com.georgeciachir.infrastructure.crypto.Encryption.encrypt;
+import static com.georgeciachir.infrastructure.crypto.EncryptionType.AES;
+import static com.georgeciachir.infrastructure.crypto.EncryptionType.DES;
 
 public class EmailTest {
 
@@ -73,7 +74,8 @@ public class EmailTest {
 
     private String createContentWithHTMLClassicTemplateWithoutDisclaimer(Draft draft) {
         ResourceLocator resourceLocator = new FolderResourceLocator();
+        DraftContent draftContent = draftContent(draft.getMessage(), draft.getTemplateType(), draft.getHtmlTemplateType());
         return htmlTemplate(resourceLocator)
-                .createContent(draft, "");
+                .createContent(draftContent, "");
     }
 }

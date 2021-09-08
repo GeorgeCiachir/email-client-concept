@@ -1,6 +1,6 @@
 package com.georgeciachir.email.creation.template;
 
-import com.georgeciachir.email.creation.Draft;
+import com.georgeciachir.email.creation.DraftContent;
 import com.georgeciachir.infrastructure.resourcelocator.ResourceLocator;
 
 import java.util.Objects;
@@ -18,9 +18,9 @@ public final class HtmlTemplate implements Template {
     }
 
     @Override
-    public String createContent(Draft draft, String disclaimer) {
-        String body = draft.getMessage();
-        String template = getTemplate(draft.getHtmlTemplateType());
+    public String createContent(DraftContent draftContent, String disclaimer) {
+        String body = draftContent.getMessage();
+        String template = getTemplate(draftContent.getHtmlTemplateType());
         String templatedBody = String.format(template, body);
 
         String bodyAndDisclaimer = templatedBody;
