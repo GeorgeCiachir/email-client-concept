@@ -1,26 +1,27 @@
 package com.georgeciachir;
 
-import com.georgeciachir.infrastructure.crypto.Encryption;
 import com.georgeciachir.email.client.RetryPolicy;
 import com.georgeciachir.email.creation.Draft;
 import com.georgeciachir.email.creation.Email;
-import com.georgeciachir.email.service.DefaultEmailService;
-import com.georgeciachir.email.service.EmailService;
 import com.georgeciachir.email.creation.template.HtmlTemplateType;
 import com.georgeciachir.email.creation.template.TemplateType;
+import com.georgeciachir.email.service.DefaultEmailService;
+import com.georgeciachir.email.service.EmailService;
+import com.georgeciachir.infrastructure.crypto.Encryption;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
+import static com.georgeciachir.email.creation.Draft.htmlTemplatedDraft;
+import static com.georgeciachir.email.creation.Email.emailFrom;
 import static com.georgeciachir.infrastructure.crypto.Encryption.encrypt;
 import static com.georgeciachir.infrastructure.crypto.EncryptionType.AES;
 import static com.georgeciachir.infrastructure.crypto.EncryptionType.DES;
-import static com.georgeciachir.email.creation.Draft.htmlTemplatedDraft;
-import static com.georgeciachir.email.creation.Email.emailFrom;
 
 public class Main {
 
-    private static final List<Draft> DRAFTS = new ArrayList<>();
+    private static final List<Draft> DRAFTS = new CopyOnWriteArrayList<>();
     private static final List<Email> SENT_EMAILS = new ArrayList<>();
 
     private static final String EXAMPLE_CONTENT = "This is the body of the email";
@@ -53,10 +54,9 @@ public class Main {
 
             if (email.isSuccessfullySent()) {
                 SENT_EMAILS.add(email);
+                DRAFTS.remove(draft);
             }
         }
-
-        SENT_EMAILS.forEach(email -> DRAFTS.removeIf(draft -> draft.getId().equals(email.getId())));
 
 
         System.out.println();
