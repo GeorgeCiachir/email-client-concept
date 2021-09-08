@@ -23,7 +23,7 @@ public final class Draft {
     private final Encryption encryption;
 
     private Draft(DraftBuilder draftBuilder) {
-        this.id = draftBuilder.getId();
+        this.id = UUID.randomUUID();
         this.message = draftBuilder.getMessage();
         this.templateType = draftBuilder.getTemplateType();
         this.htmlTemplateType = draftBuilder.getHtmlTemplateType();
@@ -97,14 +97,8 @@ public final class Draft {
         return new DraftBuilder();
     }
 
-    //enable draft editing
-    public DraftBuilder toBuilder() {
-        return builder().fromExisting(this);
-    }
-
     public static class DraftBuilder {
 
-        private UUID id;
         private String message;
         private String emailAddress;
         private TemplateType templateType;
@@ -112,29 +106,7 @@ public final class Draft {
         private RetryPolicy retryPolicy;
         private Encryption encryption;
 
-        public DraftBuilder fromExisting(Draft draft) {
-            return new DraftBuilder()
-                    .withId(draft.getId())
-                    .withMessage(draft.getMessage())
-                    .withEmailAddress(draft.getEmailAddress())
-                    .withTemplateType(draft.getTemplateType())
-                    .withHtmlTemplateType(draft.getHtmlTemplateType())
-                    .withRetryPolicy(draft.getRetryPolicy())
-                    .withEncryption(draft.getEncryption());
-        }
-
         private DraftBuilder() {
-        }
-
-        private DraftBuilder withId(UUID id) {
-            this.id = id;
-            return this;
-        }
-
-        private UUID getId() {
-            return this.id != null
-                    ? this.id
-                    : UUID.randomUUID();
         }
 
         public DraftBuilder withMessage(String message) {
